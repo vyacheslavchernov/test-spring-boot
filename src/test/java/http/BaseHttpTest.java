@@ -7,8 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import ru.vych.App;
 import ru.vych.http.config.TestServerHttpClientConfiguration;
 import ru.vych.http.impl.HttpClient;
-import ru.vych.http.impl.Request;
-import ru.vych.http.impl.Response;
+import ru.vych.http.impl.entities.Request;
+import ru.vych.http.impl.entities.Response;
 import ru.vych.http.impl.exceptions.HttpClientException;
 
 import java.util.List;

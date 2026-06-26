@@ -4,14 +4,14 @@ import lombok.SneakyThrows;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.vych.common.RandomUtils;
-import ru.vych.http.impl.HttpMethod;
-import ru.vych.http.impl.Request;
+import ru.vych.http.impl.common.HttpMethod;
+import ru.vych.http.impl.entities.Request;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 import static ru.vych.http.controllers.GetTestController.*;
+import static ru.vych.http.impl.common.HttpStatus.OK;
 
 @DisplayName("Тесты отправки GET запросов")
 public class HttpClientGetTests extends BaseHttpTest {
@@ -26,7 +26,7 @@ public class HttpClientGetTests extends BaseHttpTest {
                 .build();
 
         var rs = sendRequest(rq);
-        checkResponseStatus(rs, 200);
+        checkResponseStatus(rs, OK);
         bodyEqualsTo(rs.getBody(), HELLO_TEXT);
     }
 
@@ -43,7 +43,7 @@ public class HttpClientGetTests extends BaseHttpTest {
                 .build();
 
         var rs = sendRequest(rq);
-        checkResponseStatus(rs, 200);
+        checkResponseStatus(rs, OK);
         bodyEqualsTo(rs.getBody(), uuid);
     }
 
@@ -60,7 +60,7 @@ public class HttpClientGetTests extends BaseHttpTest {
                 .build();
 
         var rs = sendRequest(rq);
-        checkResponseStatus(rs, 200);
+        checkResponseStatus(rs, OK);
         bodyContainsExactlyEntriesOf(rs.getCastedBody(), params);
     }
 
@@ -81,7 +81,7 @@ public class HttpClientGetTests extends BaseHttpTest {
                 .build();
 
         var rs = sendRequest(rq);
-        checkResponseStatus(rs, 200);
+        checkResponseStatus(rs, OK);
         bodyContainsEntry(rs.getCastedBody(), UUID_PARAM_KEY, uuid);
     }
 
@@ -98,7 +98,7 @@ public class HttpClientGetTests extends BaseHttpTest {
                 .build();
 
         var rs = sendRequest(rq);
-        checkResponseStatus(rs, 200);
+        checkResponseStatus(rs, OK);
         bodyEqualsTo(rs.getBody(), uuid);
     }
 
@@ -118,7 +118,7 @@ public class HttpClientGetTests extends BaseHttpTest {
 
         var rs = sendRequest(rq);
 
-        checkResponseStatus(rs, 200);
+        checkResponseStatus(rs, OK);
         bodyContainsExactlyEntry(rs.getCastedBody(), key, uuid);
     }
 }
