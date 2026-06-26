@@ -1,4 +1,4 @@
-package ru.vych.http;
+package ru.vych.http.controllers;
 
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
@@ -6,11 +6,13 @@ import jakarta.ws.rs.core.*;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static ru.vych.http.TestController.TEST_CONTROLLER_PATH;
+import static jakarta.ws.rs.core.MediaType.APPLICATION_JSON;
+import static jakarta.ws.rs.core.MediaType.TEXT_PLAIN;
+import static ru.vych.http.controllers.GetTestController.GET_CONTROLLER_PATH;
 
-@Path(TEST_CONTROLLER_PATH)
-public class TestController {
-    public static final String TEST_CONTROLLER_PATH = "/test";
+@Path(GET_CONTROLLER_PATH)
+public class GetTestController {
+    public static final String GET_CONTROLLER_PATH = "/getTest";
 
     public static final String UUID_PARAM_KEY = "uuid";
 
@@ -24,21 +26,21 @@ public class TestController {
 
     @GET
     @Path(GET_HELLO_ENDPOINT)
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(TEXT_PLAIN)
     public Response getHello() {
         return Response.ok().entity(HELLO_TEXT).build();
     }
 
     @GET
     @Path(GET_QUERY_ENDPOINT)
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(TEXT_PLAIN)
     public Response getQuery(@QueryParam(UUID_PARAM_KEY) String uuid) {
         return Response.ok().entity(uuid).build();
     }
 
     @GET
     @Path(GET_MANY_QUERY_ENDPOINT)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
     public Response getManyQuery(@Context UriInfo uriInfo) {
         Map<String, String> params =
                 uriInfo.getQueryParameters()
@@ -52,7 +54,7 @@ public class TestController {
     }
 
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(TEXT_PLAIN)
     @Path(GET_PATH_ENDPOINT + "/{" + UUID_PARAM_KEY + "}")
     public Response getPath(@PathParam(UUID_PARAM_KEY) String uuid) {
         return Response.ok().entity(uuid).build();
@@ -60,7 +62,7 @@ public class TestController {
 
     @GET
     @Path(GET_PATH_AND_QUERY_ENDPOINT + "/{" + UUID_PARAM_KEY + "}")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
     public Response getPathAndQuery(@PathParam(UUID_PARAM_KEY) String key, @QueryParam(UUID_PARAM_KEY) String value) {
         return Response.ok().entity(Map.of(key, value)).build();
     }
