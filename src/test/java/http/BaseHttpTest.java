@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(classes = App.class)
 public abstract class BaseHttpTest {
     @Autowired
-    @Qualifier(TestServerHttpClientConfiguration.CLIENT_NAME)
+    @Qualifier(TestServerHttpClientConfiguration.SERVICE_CODE)
     protected HttpClient httpClient;
 
     @Step("Проверка статус-кода ответа")

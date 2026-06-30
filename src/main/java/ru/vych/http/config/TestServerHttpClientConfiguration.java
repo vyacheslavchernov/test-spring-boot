@@ -4,19 +4,20 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import ru.vych.http.impl.HttpClient;
 import ru.vych.http.impl.exceptions.HttpClientException;
+import ru.vych.logger.impl.LogService;
 
 import static ru.vych.http.config.TestServerConfiguration.TEST_SERVER_URI;
 
 @Configuration
 public class TestServerHttpClientConfiguration {
-    public static final String CLIENT_NAME = "TestServerHttpClient";
+    public static final String SERVICE_CODE = "TestServerHttpClient";
 
-    @Bean(name = CLIENT_NAME)
-    public HttpClient client(HttpClientBuilder builder) throws HttpClientException {
-        HttpClientConfig config = new HttpClientConfig()
+    @Bean(name = SERVICE_CODE)
+    public HttpClient client(HttpClientBuilder builder, LogService logService) throws HttpClientException {
+        HttpClientConfig config = new HttpClientConfig(SERVICE_CODE)
                 .setRoot(TEST_SERVER_URI)
                 .setTimeout(2000)
                 .setStoreCookies(false);
-        return builder.build(config);
+        return builder.build(config, logService);
     }
 }
