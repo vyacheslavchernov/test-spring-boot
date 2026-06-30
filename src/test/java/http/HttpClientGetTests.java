@@ -1,11 +1,11 @@
 package http;
 
-import lombok.SneakyThrows;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.vych.common.RandomUtils;
 import ru.vych.http.impl.common.HttpMethod;
 import ru.vych.http.impl.entities.Request;
+import ru.vych.http.impl.exceptions.HttpClientException;
 
 import java.util.Map;
 import java.util.UUID;
@@ -16,9 +16,8 @@ import static ru.vych.http.impl.common.HttpStatus.OK;
 @DisplayName("Тесты отправки GET запросов")
 public class HttpClientGetTests extends BaseHttpTest {
     @Test
-    @SneakyThrows
     @DisplayName("Тест отправки GET запроса без параметров")
-    public void getWithoutParamsTest() {
+    public void getWithoutParamsTest() throws HttpClientException {
         var rq = Request.builder()
                 .setUrl(GET_CONTROLLER_PATH + GET_HELLO_ENDPOINT)
                 .setMethod(HttpMethod.GET)
@@ -31,9 +30,8 @@ public class HttpClientGetTests extends BaseHttpTest {
     }
 
     @Test
-    @SneakyThrows
     @DisplayName("Тест отправки GET запроса с query параметром")
-    public void getWithQueryParamsTest() {
+    public void getWithQueryParamsTest() throws HttpClientException {
         var uuid = UUID.randomUUID().toString();
         var rq = Request.builder()
                 .setUrl(GET_CONTROLLER_PATH + GET_QUERY_ENDPOINT)
@@ -48,9 +46,8 @@ public class HttpClientGetTests extends BaseHttpTest {
     }
 
     @Test
-    @SneakyThrows
     @DisplayName("Тест отправки GET запроса с несколькими query параметрами")
-    public void getWithManyQueryParamsTest() {
+    public void getWithManyQueryParamsTest() throws HttpClientException {
         var params = RandomUtils.randomMap(15);
         var rq = Request.builder()
                 .setUrl(GET_CONTROLLER_PATH + GET_MANY_QUERY_ENDPOINT)
@@ -65,9 +62,8 @@ public class HttpClientGetTests extends BaseHttpTest {
     }
 
     @Test
-    @SneakyThrows
     @DisplayName("Тест отправки GET запроса с некорректными query параметрами")
-    public void getWithBrokenQueryParamsTest() {
+    public void getWithBrokenQueryParamsTest() throws HttpClientException {
         var uuid = UUID.randomUUID().toString();
         var rq = Request.builder()
                 .setUrl(GET_CONTROLLER_PATH + GET_MANY_QUERY_ENDPOINT)
@@ -86,9 +82,8 @@ public class HttpClientGetTests extends BaseHttpTest {
     }
 
     @Test
-    @SneakyThrows
     @DisplayName("Тест отправки GET запроса с path параметром")
-    public void getWithPathParamsTest() {
+    public void getWithPathParamsTest() throws HttpClientException {
         var uuid = UUID.randomUUID().toString();
         var rq = Request.builder()
                 .setUrl(GET_CONTROLLER_PATH + GET_PATH_ENDPOINT)
@@ -103,9 +98,8 @@ public class HttpClientGetTests extends BaseHttpTest {
     }
 
     @Test
-    @SneakyThrows
     @DisplayName("Тест отправки GET запроса с path и query параметрами одновременно")
-    public void getWithPathNQueryParamsTest() {
+    public void getWithPathNQueryParamsTest() throws HttpClientException {
         var key = UUID.randomUUID().toString();
         var uuid = UUID.randomUUID().toString();
         var rq = Request.builder()
