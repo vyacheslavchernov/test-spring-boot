@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import ru.vych.App;
 import ru.vych.http.config.TestServerHttpClientConfiguration;
 import ru.vych.http.impl.HttpClient;
+import ru.vych.http.impl.entities.Header;
 import ru.vych.http.impl.entities.Request;
 import ru.vych.http.impl.entities.Response;
 import ru.vych.http.impl.exceptions.HttpClientException;
@@ -74,4 +75,17 @@ public abstract class BaseHttpTest {
                 .containsExactly(Map.entry(key, value));
     }
 
+    @Step("Проверяем, что запрос содержит заголовок с ожидаемым значением")
+    protected void requestContainsHeader(Request request, String name, String value) {
+        assertThat(request.getHeaders())
+                .describedAs("Запрос не содержит ожидаемого заголовка")
+                .contains(new Header(name, value));
+    }
+
+    @Step("Проверяем, что ответ содержит заголовок с ожидаемым значением")
+    protected void responseContainsHeader(Response response, String name, String value) {
+        assertThat(response.getHeaders())
+                .describedAs("Ответ не содержит ожидаемого заголовка")
+                .contains(new Header(name, value));
+    }
 }
